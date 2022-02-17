@@ -37,8 +37,7 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl} from './util/util';
       return
     }
     const path = await filterImageFromURL(imageUrl)
-    res.sendFile(path)
-    await deleteLocalFiles([path])
+    res.sendFile(path, async (err) => await deleteLocalFiles([path]))
   })
   
   // Root Endpoint
