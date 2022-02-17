@@ -39,7 +39,7 @@ export async function deleteLocalFiles(files: string[]): Promise<void> {
 }
 
 export function validateUrl(url: string): boolean {
-  const validTbl = [
+  const validTbl: string[] = [
     "http://",
     "https://",
   ];
