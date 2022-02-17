@@ -36,8 +36,13 @@ import {deleteLocalFiles, filterImageFromURL, validateUrl} from "./util/util";
       res.send("The image URL is not valid");
       return;
     }
-    const path = await filterImageFromURL(imageUrl);
-    res.sendFile(path, async () => await deleteLocalFiles([path]));
+    try {
+      const path = await filterImageFromURL(imageUrl);
+      res.sendFile(path, async () => await deleteLocalFiles([path]));
+    } catch (error) {
+      console.log(error);
+      res.send("Can't filter image, please check image source");
+    }
   });
 
   // Root Endpoint
