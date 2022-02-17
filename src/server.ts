@@ -33,7 +33,7 @@ import {deleteLocalFiles, filterImageFromURL, validateUrl} from "./util/util";
   app.get("/filteredimage", async (req, res) => {
     const imageUrl = req.query.image_url;
     if (!validateUrl(imageUrl)) {
-      res.send("The image URL is not valid");
+      res.status(422).send("The image URL is not valid");
       return;
     }
     try {
@@ -41,7 +41,7 @@ import {deleteLocalFiles, filterImageFromURL, validateUrl} from "./util/util";
       res.sendFile(path, async () => await deleteLocalFiles([path]));
     } catch (error) {
       console.log(error);
-      res.send("Can't filter image, please check image source");
+      res.status(422).send("Can't filter image, please check image source");
     }
   });
 
