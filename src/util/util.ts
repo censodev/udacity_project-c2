@@ -18,8 +18,8 @@ export async function filterImageFromURL(inputURL: string): Promise<string> {
         .resize(256, 256) // resize
         .quality(60) // set JPEG quality
         .greyscale() // set greyscale
-        .write(__dirname + outpath, (img) => {
-          resolve(__dirname + outpath);
+        .write(outpath, (img) => {
+          resolve(outpath);
         });
     } catch (error) {
       reject(error);
@@ -36,4 +36,12 @@ export async function deleteLocalFiles(files: Array<string>) {
   for (let file of files) {
     fs.unlinkSync(file);
   }
+}
+
+export function validateUrl(url: string): boolean {
+  const validTbl = [
+    'http://',
+    'https://',
+  ]
+  return validTbl.filter(pattern => url.includes(pattern)).length > 0
 }
